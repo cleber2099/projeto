@@ -1,13 +1,13 @@
-package br.com.cleber.projeto.repository;
+package br.com.cleber.projeto.entity;
 
+import br.com.cleber.projeto.dto.UsuarioDTO;
 import jakarta.persistence.*;
+import org.springframework.beans.BeanUtils;
 
-import javax.annotation.processing.Generated;
+import java.util.Objects;
 
 @Entity
 @Table(name = "USUARIO")
-
-
 public class UsuarioEntity {
 
     @Id
@@ -22,7 +22,12 @@ public class UsuarioEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    public UsuarioEntity(UsuarioDTO usuario){
+        BeanUtils.copyProperties(usuario, this);
+    }
+    public UsuarioEntity(){
 
+    }
     public Long getId() {
         return id;
     }
@@ -61,5 +66,18 @@ public class UsuarioEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioEntity that = (UsuarioEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

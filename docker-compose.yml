@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "6543:5432" # Mapeando a porta do host para a porta do contêiner do PostgreSQL
+    environment:
+      POSTGRES_DB: banco543
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senha123
